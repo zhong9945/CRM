@@ -1,67 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE configuration
-  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd"><!--约束文件-->
+
+
 <configuration>
 
-  <properties resource="jdbc.properties"/>
-
+  <!--设置别名-->
   <typeAliases>
-
-  	<package name="com.zhong.settings.domain"/>
-
-
+    <!--      name  实体类所在的包名（不是也可以）-->
+    <package name="com.zhong.settings.domain"/>
   </typeAliases>
 
-  <environments default="development">
-    <environment id="development">
-      <transactionManager type="JDBC"/>
-      <dataSource type="POOLED">
-        <property name="driver" value="${jdbc.driver}"/>
-        <property name="url" value="${jdbc.url}"/>
-        <property name="username" value="${jdbc.user}"/>
-        <property name="password" value="${jdbc.password}"/>
-      </dataSource>
-    </environment>
-  </environments>
-
-
-  <mappers>
-
-      <package name="com.zhong.settings.dao"/>
-
+  <!--    指定前其他mapping语句的位置
+           目的是找到其他文件的sql语句
+           一个mapper resource只能指定一个mapper文件-->
+  <mappers><!--sql mapper(sql映射文件)的位置-->
+    <!--        name是包名，这个包名中的所有的mapper.xml文件一次就都能加载
+                使用package的要求，1，mapper文件名必须和dao接口名完全一样，包括大小写
+                                2，mapper文件必须和dao接口在同一目录之下-->
+    <package name="com.zhong.settings.dao"/>
   </mappers>
 </configuration>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

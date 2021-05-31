@@ -32,12 +32,6 @@
 				login();
 			}
 		})
-
-
-
-
-
-
 	})
 
    //自定义方法，写在页面加载完成方法后
@@ -52,10 +46,6 @@
 			//去后台验证
 			$.ajax({
 				url: "settings/login.do",
-				data: {
-					"loginAct": loginAct,
-					"loginPwd": loginPwd
-				},
 				type: "post",
 				dataType: "json",
 				success: function (data) {

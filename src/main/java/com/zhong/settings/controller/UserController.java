@@ -29,8 +29,8 @@ public class UserController {
         try{
             //能得到对象就说明该账号可用
             User  user = userService.userLogin(loginAct,password,ip);
-            //创建session对象
-            request.getSession().setAttribute("user",user);
+//            //创建session对象
+//            request.getSession().setAttribute("user",user);
             //需要返回{"success",ture}
             mv.addObject("success",true);
 
@@ -39,6 +39,7 @@ public class UserController {
         catch (Exception e){
             e.printStackTrace();
             //抛出异常  需要返回{"success":false,"message":"?"}
+            mv.addObject("success",false);
             mv.addObject("msg",e.getMessage());
 
             return  mv;

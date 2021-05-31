@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 public interface UserDao {
 
-     User queryUser(@Param(value = "loginAct") String loginAct, @Param(value = "loginPwd") String loginPwd);
+     User queryUser(String loginAct, String loginPwd);
 
 
 }
