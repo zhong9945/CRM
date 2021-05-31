@@ -11,6 +11,74 @@
 <link href="jquery/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
 <script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
+<script>
+
+	$(function (){
+		//每次刷新页面后，使用户id文本框为空
+		$("#loginAct").val("");
+
+		//页面加在完毕后 让用户id的文本框自动获得焦点
+		$("#loginAct").focus();
+
+		//为登录按钮绑定单击事件
+		$("#submitBtn").click(function (){
+			login();
+		})
+
+		//获取键盘按键
+		$(window).keydown(function (event){
+			// alert(event.keyCode);
+			if(event.keyCode==13){
+				login();
+			}
+		})
+
+
+
+
+
+
+	})
+
+   //自定义方法，写在页面加载完成方法后
+	//登录方法
+	function login(){
+		//账号密码不能为空  除去前后空格
+		var act = $.trim($("#loginAct").val());
+		var psd = $.trim($("#loginPwd").val());
+		if(act==""||psd==""){
+			$("#msg").html("账号密码不能为空");
+		}else {
+			//去后台验证
+			$.ajax({
+				url: "settings/login.do",
+				data: {
+					"loginAct": loginAct,
+					"loginPwd": loginPwd
+				},
+				type: "post",
+				dataType: "json",
+				success: function (data) {
+					if (data.success) {
+						//跳转到工作台
+						window.location.href = "workbench/index.html";
+					} else {
+						$("#msg").html(data.msg);
+					}
+				}
+
+			})
+		}
+
+
+	}
+
+
+
+
+</script>
+
+
 </head>
 <body>
 	<div style="position: absolute; top: 0px; left: 0px; width: 60%;">
@@ -28,17 +96,22 @@
 			<form action="workbench/index.html" class="form-horizontal" role="form">
 				<div class="form-group form-group-lg">
 					<div style="width: 350px;">
-						<input class="form-control" type="text" placeholder="用户名">
+						<input class="form-control" type="text" placeholder="用户名" id="loginAct">
 					</div>
 					<div style="width: 350px; position: relative;top: 20px;">
-						<input class="form-control" type="password" placeholder="密码">
+						<input class="form-control" type="password" placeholder="密码" id="loginPwd">
 					</div>
 					<div class="checkbox"  style="position: relative;top: 30px; left: 10px;">
 						
-							<span id="msg"></span>
+							<span id="msg" style="color: red"></span>
 						
 					</div>
-					<button type="submit" class="btn btn-primary btn-lg btn-block"  style="width: 350px; position: relative;top: 45px;">登录</button>
+
+			<%--	按钮在form表单中，默认的行为是提交表单，
+					一定要将按钮类型设置为button
+					按钮所触发的行为应该是我们写的js代码所决定的
+			--%>
+					<button type="button" id="submitBtn" class="btn btn-primary btn-lg btn-block"  style="width: 350px; position: relative;top: 45px;">登录</button>
 				</div>
 			</form>
 		</div>

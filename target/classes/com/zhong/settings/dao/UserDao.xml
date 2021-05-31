@@ -6,7 +6,9 @@
 <!--使用dao接口的全限定名称-->
 
 <mapper namespace="com.zhong.settings.dao.UserDao">
-
+    <select id="queryUser" resultType="User">
+        select * from tbl_user where loginAct= #{loginAct} and loginPwd =#{loginPwd}
+    </select>
 
 
 </mapper>
